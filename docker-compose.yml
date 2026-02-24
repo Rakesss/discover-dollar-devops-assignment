@@ -9,15 +9,17 @@ services:
       - "27017:27017"
 
   backend:
-    build: ./backend
+    image: player8598/dd-backend:latest
+    container_name: backend
     ports:
-      - "3000:3000"
-    environment:
-      - MONGO_URI=mongodb://mongodb:27017/cruddb
+      - "8080:8080"
     depends_on:
       - mongodb
 
   frontend:
-    build: ./frontend
+    image: player8598/dd-frontend:latest
+    container_name: frontend
     ports:
-      - "8081:80"
+      - "80:80"
+    depends_on:
+      - backend
